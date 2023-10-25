@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Força da Senha</title>
+
+    <style>
+
+        body {
+            background-color: gray;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        section {
+            width: 20rem;
+            background-color: aliceblue;
+            justify-content: center;
+            border: 0.5rem solid black;
+            text-align: center;
+            padding: 1%;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        textarea {
+            resize: none;
+        }
+
+        .campoSenha {
+            background-color: black;
+            width: 90%;
+            margin: 2%;
+            height: 2rem;
+        }
+
+        .botaoOcultar {
+            text-align: right;
+            justify-content: right;
+            color: black;
+        }
+
+        .barraStatus {
+            width: 0;
+            resize: none;
+            color: black;
+        }
+
+        .barraStatusFraca {
+            width: 30%;
+            background-color: red;
+        }
+
+        .barraStatusModerada {
+            width: 60%;
+            background-color: yellow;
+        }
+
+        .barraStatusForte {
+            width: 100%;
+            background-color: green;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <main>
+        <section>
+            <h1>Verificar Força da Senha</h1>
+
+            <input class="campoSenha" type="password" id="idSenha" name="nameSenha" placeholder="Password" >
+            <input class="botaoOcultar" type="button" id="idOcultar" value="HIDE"><br>
+            <input class="barraStatus" type="range" id="isStatusSenha" name="nameSenha">
+
+        </section>
+    </main>
+
+    <script>
+        var forcaSenha = 0
+
+        let campoSenha = document.getElementById("idSenha")
+        let botaoOcultar = document.getElementById("idOcultar")
+        botaoOcultar.onclick = function(){
+            
+        }
+
+        campoSenha.onkeyup = function(){
+            let senha = campoSenha.value
+            console.log(senha);
+            if(senha.length > 13){
+                forcaSenha = 5
+            } else {
+                if(senha.length > 11){
+                    forcaSenha = 4
+                } else {
+                    if(senha.length > 9){
+                        forcaSenha = 3
+                    } else {
+                        if (senha.length > 6) {
+                            forcaSenha = 2
+                        } else {
+                            if (senha.length > 0) {
+                                forcaSenha = 1
+                            } else {
+                                forcaSenha = 0
+                            }
+                        }
+                    }
+                }
+            }
+
+            if(/[0-9]/.test(senha)){
+                forcaSenha++
+            }
+            if(/[A-Z]/.test(senha)){
+                forcaSenha++
+            }
+            if(/[a-z]/.test(senha)){
+                forcaSenha++
+            }
+            if(/[!@#$%¨&*()_-+=`[{}]~ºª,<.>;:°'""]/){
+                forcaSenha+2
+            }
+            console.log(forcaSenha);
+        }
+
+    </script>
+</body>
+
+</html>
